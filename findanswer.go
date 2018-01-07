@@ -14,11 +14,12 @@ func max(a, b int) int {
 }
 
 func findTheAnswer(question string) string {
-	if strings.HasPrefix(question, "which of the following numbers is the largest") {
+	switch {
+	case strings.HasPrefix(question, "which of the following numbers is the largest"):
 		return findLargest(question)
-	} else if strings.HasPrefix(question, "what is your name") {
+	case strings.HasPrefix(question, "what is your name"):
 		return "go"
-	} else if strings.HasPrefix(question, "what is") {
+	case strings.HasPrefix(question, "what is"):
 		return doSimpleCalculation(question)
 	}
 	return ""
