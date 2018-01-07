@@ -22,12 +22,12 @@ func main() {
 }
 
 func handleQuery(query string) string {
-	splits := strings.Split(query, ":")
+	splits := strings.SplitN(query, ":", 2)
 	id := splits[0]
-	question := splits[1]
+	question := strings.TrimSpace(splits[1])
 
 	fmt.Printf("query [%v] : %v\n", id, question)
-	answer := findTheAnswer(query)
+	answer := findTheAnswer(question)
 	fmt.Printf("response [%v] : %v\n", id, answer)
 	return answer
 }
