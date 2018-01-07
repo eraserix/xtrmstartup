@@ -13,6 +13,14 @@ func max(a, b int) int {
 	return b
 }
 
+func toInt(s []string) []int {
+	ints := make([]int, len(s))
+	for i, n := range s {
+		ints[i], _ = strconv.Atoi(strings.TrimSpace(n))
+	}
+	return ints
+}
+
 func findTheAnswer(question string) string {
 	switch {
 	case strings.HasPrefix(question, "which of the following numbers is the largest"):
@@ -27,11 +35,11 @@ func findTheAnswer(question string) string {
 
 func findLargest(question string) string {
 	numbers := strings.Split(strings.Split(question, ":")[1], ",")
+	ints := toInt(numbers)
 
 	maxV := 0
-	for _, n := range numbers {
-		parsed, _ := strconv.Atoi(strings.TrimSpace(n))
-		maxV = max(parsed, maxV)
+	for _, n := range ints {
+		maxV = max(n, maxV)
 	}
 	return strconv.Itoa(maxV)
 }
