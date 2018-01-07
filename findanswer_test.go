@@ -15,3 +15,10 @@ func TestFindLargest(t *testing.T) {
 		t.Errorf("largest number was %v, expected 464", largest)
 	}
 }
+
+func TestSimpleAddition(t *testing.T) {
+	sum := findTheAnswer("what is 12 plus 16")
+	if sum != "28" {
+		t.Errorf("sum of 12 16 was %v, expected 28", sum)
+	}
+}

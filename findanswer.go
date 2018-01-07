@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -17,6 +18,8 @@ func findTheAnswer(question string) string {
 		return findLargest(question)
 	} else if strings.HasPrefix(question, "what is your name") {
 		return "go"
+	} else if strings.HasPrefix(question, "what is") {
+		return doSimpleAddition(question)
 	}
 	return ""
 }
@@ -30,4 +33,10 @@ func findLargest(question string) string {
 		maxV = max(parsed, maxV)
 	}
 	return strconv.Itoa(maxV)
+}
+
+func doSimpleAddition(question string) string {
+	var a, b int
+	fmt.Sscanf(question, "what is %d plus %d", &a, &b)
+	return strconv.Itoa(a + b)
 }
