@@ -27,7 +27,7 @@ func handleQuery(query string) string {
 	question := splits[1]
 
 	fmt.Printf("query [%v] : %v\n", id, question)
-	answer := answer(question)
+	answer := findTheAnswer(query)
 	fmt.Printf("response [%v] : %v\n", id, answer)
 	return answer
 }
