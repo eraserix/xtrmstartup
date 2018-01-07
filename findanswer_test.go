@@ -22,3 +22,10 @@ func TestSimpleAddition(t *testing.T) {
 		t.Errorf("sum of 12 16 was %v, expected 28", sum)
 	}
 }
+
+func TestSimpleMultiplication(t *testing.T) {
+	product := findTheAnswer("what is 15 multiplied by 14")
+	if product != "210" {
+		t.Errorf("product wrong")
+	}
+}
