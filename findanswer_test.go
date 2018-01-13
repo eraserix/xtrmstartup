@@ -24,3 +24,13 @@ func TestSimpleMultiplication(t *testing.T) {
 	product := findTheAnswer("what is 15 multiplied by 14")
 	assert.Equal(t, "210", product)
 }
+
+func TestFindPrimes(t *testing.T) {
+	primes := findTheAnswer("which of the following numbers are primes: 819, 401, 369, 383")
+	assert.Equal(t, "401, 383", primes)
+}
+
+func TestFindFibonacci(t *testing.T) {
+	fibo := findTheAnswer("what is the 21st number in the Fibonacci sequence")
+	assert.Equal(t, "10946", fibo)
+}
