@@ -87,6 +87,9 @@ func doSimpleCalculation(question string) string {
 	case strings.Contains(question, "plus"):
 		fmt.Sscanf(question, "what is %d plus %d", &a, &b)
 		return strconv.Itoa(a + b)
+	case strings.Contains(question, "minus"):
+		fmt.Sscanf(question, "what is %d minus %d", &a, &b)
+		return strconv.Itoa(a - b)
 	case strings.Contains(question, "multiplied by"):
 		fmt.Sscanf(question, "what is %d multiplied by %d", &a, &b)
 		return strconv.Itoa(a * b)

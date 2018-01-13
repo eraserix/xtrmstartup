@@ -25,6 +25,11 @@ func TestSimpleMultiplication(t *testing.T) {
 	assert.Equal(t, "210", product)
 }
 
+func TestSimpleSubtraction(t *testing.T) {
+	difference := findTheAnswer("what is 4 minus 19")
+	assert.Equal(t, "-15", difference)
+}
+
 func TestFindPrimes(t *testing.T) {
 	primes := findTheAnswer("which of the following numbers are primes: 819, 401, 369, 383")
 	assert.Equal(t, "401, 383", primes)
