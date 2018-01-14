@@ -95,6 +95,9 @@ func doSimpleCalculation(question string) string {
 	case strings.Contains(question, "multiplied by"):
 		fmt.Sscanf(question, "what is %d multiplied by %d", &a, &b)
 		return strconv.Itoa(a * b)
+	case strings.Contains(question, "to the power of"):
+		fmt.Sscanf(question, "what is %d to the power of %d", &a, &b)
+		return strconv.Itoa(int(math.Pow(float64(a), float64(b))))
 	}
 	return ""
 }

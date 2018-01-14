@@ -45,3 +45,8 @@ func TestFindSquarAndCube(t *testing.T) {
 		" square and a cube: 531441, 1225, 199, 479")
 	assert.Equal(t, "531441", squareCube)
 }
+
+func TestToThePowerOf(t *testing.T) {
+	power := findTheAnswer("what is 14 to the power of 7")
+	assert.Equal(t, "105413504", power)
+}
