@@ -84,12 +84,34 @@ func findPrimes(question string) string {
 	return strings.Join(strPrimes, ", ")
 }
 
+func doPlusQuestion(question string) string {
+	var a, b, c int
+	switch {
+	case strings.Count(question, "plus") == 2:
+		fmt.Sscanf(question, "what is %d plus %d plus %d", &a, &b, &c)
+		return strconv.Itoa(a + b + c)
+	case strings.Count(question, "plus") == 1 &&
+		strings.Count(question, "multiplied by") == 1:
+		_, e := fmt.Sscanf(question, "what is %d plus %d multiplied by %d", &a, &b, &c)
+		if e == nil {
+			return strconv.Itoa(a + b*c)
+		}
+		_, e = fmt.Sscanf(question, "what is %d multiplied by %d plus %d", &a, &b, &c)
+		if e == nil {
+			return strconv.Itoa(a*b + c)
+		}
+	case strings.Count(question, "plus") == 1:
+		fmt.Sscanf(question, "what is %d plus %d", &a, &b)
+		return strconv.Itoa(a + b)
+	}
+	return ""
+}
+
 func doSimpleCalculation(question string) string {
 	var a, b int
 	switch {
 	case strings.Contains(question, "plus"):
-		fmt.Sscanf(question, "what is %d plus %d", &a, &b)
-		return strconv.Itoa(a + b)
+		return doPlusQuestion(question)
 	case strings.Contains(question, "minus"):
 		fmt.Sscanf(question, "what is %d minus %d", &a, &b)
 		return strconv.Itoa(a - b)
@@ -128,7 +150,6 @@ func findSquareAndCube(question string) string {
 
 	ints := getIntList(question)
 	var result []string
-	fmt.Println(ints)
 
 	for _, n := range ints {
 		if isIntPower(n, 2) && isIntPower(n, 3) {

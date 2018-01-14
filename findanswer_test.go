@@ -52,6 +52,11 @@ func TestToThePowerOf(t *testing.T) {
 }
 
 func TestAdditionAndMultiplication(t *testing.T) {
-	r := "what is 14 plus 4 multiplied by 2"
-	assert.Equal(t, "36", r)
+	r := findTheAnswer("what is 14 plus 4 multiplied by 2")
+	assert.Equal(t, "22", r)
+}
+
+func TestMultiAddition(t *testing.T) {
+	sum := findTheAnswer("what is 16 plus 12 plus 2")
+	assert.Equal(t, "30", sum)
 }
