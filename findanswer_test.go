@@ -62,6 +62,11 @@ func TestMultiAddition(t *testing.T) {
 }
 
 func TestFindScrabbleScore(t *testing.T) {
-    score := findTheAnswer("what is the english scrabble score of ruby")
-    assert.Equal(t, "9", score)
+	score := findTheAnswer("what is the english scrabble score of ruby")
+	assert.Equal(t, "9", score)
+}
+
+func TestAnagram(t *testing.T) {
+	anagrams := findTheAnswer("which of the following is an anagram of \"dictionary\": abdication, indicatory, butterfly, incendiary")
+	assert.Equal(t, "indicatory", anagrams)
 }

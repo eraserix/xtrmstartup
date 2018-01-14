@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"math"
 	"math/big"
+	"reflect"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -16,17 +18,22 @@ func max(a, b int) int {
 	return b
 }
 
-func toInt(s []string) []int {
-	ints := make([]int, len(s))
-	for i, n := range s {
-		ints[i], _ = strconv.Atoi(strings.TrimSpace(n))
+func getIntList(question string) []int {
+	numbers := getStringList(question)
+	ints := make([]int, len(numbers))
+	for i, n := range numbers {
+		ints[i], _ = strconv.Atoi(n)
 	}
 	return ints
 }
 
-func getIntList(question string) []int {
-	numbers := strings.Split(strings.Split(question, ":")[1], ",")
-	return toInt(numbers)
+func getStringList(question string) []string {
+	stringlist := strings.Split(strings.Split(question, ":")[1], ",")
+	result := make([]string, len(stringlist))
+	for i, s := range stringlist {
+		result[i] = strings.TrimSpace(s)
+	}
+	return result
 }
 
 func findTheAnswer(question string) string {
@@ -43,8 +50,10 @@ func findTheAnswer(question string) string {
 		return "Paris"
 	case strings.HasPrefix(question, "what colour is a banana"):
 		return "Yellow"
-    case strings.HasPrefix(question, "what is the english scrabble score of"):
-        return findScrabbleScore(question)
+	case strings.HasPrefix(question, "what is the english scrabble score of"):
+		return findScrabbleScore(question)
+	case strings.HasPrefix(question, "which of the following is an anagram of"):
+		return findAnagram(question)
 	case strings.HasPrefix(question, "what is the") &&
 		strings.HasSuffix(question, "number in the Fibonacci sequence"):
 		return findFibonacci(question)
@@ -162,36 +171,56 @@ func findSquareAndCube(question string) string {
 }
 
 func findScrabbleScore(question string) string {
-    var word string
-    fmt.Sscanf(question, "what is the english scrabble score of %s", &word)
+	var word string
+	fmt.Sscanf(question, "what is the english scrabble score of %s", &word)
 
-    score := 0
+	score := 0
 
-    // 1 point: E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4
-    // 2 points: D ×4, G ×3
-    // 3 points: B ×2, C ×2, M ×2, P ×2
-    // 4 points: F ×2, H ×2, V ×2, W ×2, Y ×2
-    // 5 points: K ×1
-    // 8 points: J ×1, X ×1
-    // 10 points: Q ×1, Z ×1
-    for _, char := range(word) {
-        switch char {
-        case 'e', 'a', 'i', 'o', 'n', 'r', 't', 'l', 's', 'u':
-            score += 1
-        case 'd', 'g':
-            score += 2
-        case 'b', 'c', 'm', 'p':
-            score += 3
-        case 'f', 'h', 'v', 'w', 'y':
-            score += 4
-        case 'k':
-            score += 5
-        case 'j', 'x':
-            score += 8
-        case 'q', 'z':
-            score += 10
-        }
-    }
+	// 1 point: E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4
+	// 2 points: D ×4, G ×3
+	// 3 points: B ×2, C ×2, M ×2, P ×2
+	// 4 points: F ×2, H ×2, V ×2, W ×2, Y ×2
+	// 5 points: K ×1
+	// 8 points: J ×1, X ×1
+	// 10 points: Q ×1, Z ×1
+	for _, char := range word {
+		switch char {
+		case 'e', 'a', 'i', 'o', 'n', 'r', 't', 'l', 's', 'u':
+			score += 1
+		case 'd', 'g':
+			score += 2
+		case 'b', 'c', 'm', 'p':
+			score += 3
+		case 'f', 'h', 'v', 'w', 'y':
+			score += 4
+		case 'k':
+			score += 5
+		case 'j', 'x':
+			score += 8
+		case 'q', 'z':
+			score += 10
+		}
+	}
 
-    return strconv.Itoa(score)
+	return strconv.Itoa(score)
+}
+
+func findAnagram(question string) string {
+	var word string
+	fmt.Sscanf(question, "which of the following is an anagram of \"%s\":", &word)
+	word = word[:len(word)-2]
+	runes := strings.Split(word, "")
+	sort.Strings(runes)
+	candidates := getStringList(question)
+
+	var result []string
+	for _, c := range candidates {
+		runesC := strings.Split(c, "")
+		sort.Strings(runesC)
+		if reflect.DeepEqual(runesC, runes) {
+			result = append(result, c)
+		}
+	}
+
+	return strings.Join(result, ", ")
 }
