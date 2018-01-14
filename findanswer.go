@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/big"
 	"regexp"
 	"strconv"
 	"strings"
@@ -97,7 +98,12 @@ func doSimpleCalculation(question string) string {
 		return strconv.Itoa(a * b)
 	case strings.Contains(question, "to the power of"):
 		fmt.Sscanf(question, "what is %d to the power of %d", &a, &b)
-		return strconv.Itoa(int(math.Pow(float64(a), float64(b))))
+		base := new(big.Int).SetInt64(int64(a))
+		result := new(big.Int).Set(base)
+		for i := 1; i < b; i++ {
+			result.Mul(result, base)
+		}
+		return result.String()
 	}
 	return ""
 }
