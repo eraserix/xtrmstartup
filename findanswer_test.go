@@ -39,3 +39,9 @@ func TestFindFibonacci(t *testing.T) {
 	fibo := findTheAnswer("what is the 21st number in the Fibonacci sequence")
 	assert.Equal(t, "10946", fibo)
 }
+
+func TestFindSquarAndCube(t *testing.T) {
+	squareCube := findTheAnswer("which of the following numbers is both a" +
+		" square and a cube: 531441, 1225, 199, 479")
+	assert.Equal(t, "531441", squareCube)
+}

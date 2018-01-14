@@ -36,6 +36,8 @@ func findTheAnswer(question string) string {
 		return "go"
 	case strings.HasPrefix(question, "which of the following numbers are primes"):
 		return findPrimes(question)
+	case strings.HasPrefix(question, "which of the following numbers is both a square and a cube"):
+		return findSquareAndCube(question)
 	case strings.HasPrefix(question, "which city is the Eiffel tower in"):
 		return "Paris"
 	case strings.HasPrefix(question, "what colour is a banana"):
@@ -106,4 +108,23 @@ func findFibonacci(question string) string {
 		last, fibo = fibo, fibo+last
 	}
 	return strconv.Itoa(fibo)
+}
+
+func findSquareAndCube(question string) string {
+	isIntPower := func(number, power int) bool {
+		root := math.Pow(float64(number), 1/float64(power))
+		num2 := int(math.Pow(math.Floor(root+0.5), float64(power)))
+		return num2 == number
+	}
+
+	ints := getIntList(question)
+	var result []string
+	fmt.Println(ints)
+
+	for _, n := range ints {
+		if isIntPower(n, 2) && isIntPower(n, 3) {
+			result = append(result, strconv.Itoa(n))
+		}
+	}
+	return strings.Join(result, ", ")
 }
