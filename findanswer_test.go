@@ -60,3 +60,8 @@ func TestMultiAddition(t *testing.T) {
 	sum := findTheAnswer("what is 16 plus 12 plus 2")
 	assert.Equal(t, "30", sum)
 }
+
+func TestFindScrabbleScore(t *testing.T) {
+    score := findTheAnswer("what is the english scrabble score of ruby")
+    assert.Equal(t, "9", score)
+}
