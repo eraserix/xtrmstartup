@@ -49,6 +49,9 @@ func TestFindSquarAndCube(t *testing.T) {
 func TestToThePowerOf(t *testing.T) {
 	power := findTheAnswer("what is 19 to the power of 18")
 	assert.Equal(t, "104127350297911241532841", power)
+
+	power = findTheAnswer("what is 19 to the power of 0")
+	assert.Equal(t, "1", power)
 }
 
 func TestAdditionAndMultiplication(t *testing.T) {

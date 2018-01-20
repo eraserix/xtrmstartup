@@ -49,8 +49,8 @@ func doSimpleCalculation(question string) string {
 	case strings.Contains(question, "to the power of"):
 		fmt.Sscanf(question, "what is %d to the power of %d", &a, &b)
 		base := new(big.Int).SetInt64(int64(a))
-		result := new(big.Int).Set(base)
-		for i := 1; i < b; i++ {
+		result := new(big.Int).SetInt64(1)
+		for i := 0; i < b; i++ {
 			result.Mul(result, base)
 		}
 		return result.String()
