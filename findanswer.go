@@ -41,14 +41,18 @@ func findTheAnswer(question string) string {
 		return findLargest(question)
 	case strings.HasPrefix(question, "what is your name"):
 		return "go"
-	case strings.HasPrefix(question, "which of the following numbers are primes"):
-		return findPrimes(question)
-	case strings.HasPrefix(question, "which of the following numbers is both a square and a cube"):
-		return findSquareAndCube(question)
 	case strings.HasPrefix(question, "which city is the Eiffel tower in"):
 		return "Paris"
 	case strings.HasPrefix(question, "what colour is a banana"):
 		return "Yellow"
+	case strings.HasPrefix(question, "which year was Theresa May first elected as the Prime Minister of Great Britain"):
+		return "2016"
+	case strings.HasPrefix(question, "who played James Bond in the film Dr No"):
+		return "Sean Connery"
+	case strings.HasPrefix(question, "which of the following numbers are primes"):
+		return findPrimes(question)
+	case strings.HasPrefix(question, "which of the following numbers is both a square and a cube"):
+		return findSquareAndCube(question)
 	case strings.HasPrefix(question, "what is the english scrabble score of"):
 		return findScrabbleScore(question)
 	case strings.HasPrefix(question, "which of the following is an anagram of"):
