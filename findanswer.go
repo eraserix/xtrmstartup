@@ -206,8 +206,10 @@ func findScrabbleScore(question string) string {
 }
 
 func findAnagram(question string) string {
+	// %s matches the string until the next space, in this case the rest
+	// of the string. Therefore, split away the '":' at the end.
 	var word string
-	fmt.Sscanf(question, "which of the following is an anagram of \"%s\":", &word)
+	fmt.Sscanf(question, "which of the following is an anagram of \"%s", &word)
 	word = word[:len(word)-2]
 	runes := strings.Split(word, "")
 	sort.Strings(runes)
