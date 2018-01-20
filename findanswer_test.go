@@ -15,6 +15,7 @@ func TestFindTheAnswer(t *testing.T) {
 		{"what is 15 multiplied by 14", "210"},
 		{"what is 4 minus 19", "-15"},
 		{"which of the following numbers are primes: 819, 401, 369, 383", "401, 383"},
+		{"which of the following numbers are primes: 529, 281, 353, 823", "281, 353, 823"},
 		{"what is the 21st number in the Fibonacci sequence", "10946"},
 		{"which of the following numbers is both a square and a cube: 531441, 1225, 199, 479",
 			"531441"},

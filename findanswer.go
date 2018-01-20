@@ -77,7 +77,7 @@ func findLargest(question string) string {
 }
 
 func isPrime(n int) bool {
-	for div := 2; div < int(math.Floor(math.Sqrt(float64(n)))); div++ {
+	for div := 2; div <= int(math.Floor(math.Sqrt(float64(n)))); div++ {
 		if n%div == 0 {
 			return false
 		}
